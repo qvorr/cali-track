@@ -1,21 +1,10 @@
-const mainListEl = document.querySelector(".mainList")
+const worksButtonEl = document.querySelector(".working");
+const doesntButtonEl = document.querySelector(".doesnt");
+const serverURL = "http://127.0.0.1:3000";
 
-
-console.log(mainListEl.value);
-
-// get an item
-mainListEl.addEventListener("click", (e) => {
-  const item = e.target.closest(".element");
-  if (item !== null) {
-    console.log(item.textContent);
-  }
-});
-
-
-// get a month
-mainListEl.addEventListener("click", (e) => {
-  const item = e.target.closest(".month");
-  if (item !== null) {
-    console.log(item.firstChild.textContent);
-  }
+worksButtonEl.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const data = await fetch(serverURL + "/info");
+  const result = await data.text();
+  console.log(result);
 });
