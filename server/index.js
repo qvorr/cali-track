@@ -8,12 +8,28 @@ app.use(express.json());
 const PORT = 3000;
 let i = 1;
 
+const exercises = {
+  back: ["pull up", "oap assisted"],
+  chest: ["dips", "one arm pushups"]
+}
 
 
 app.get("/info", (req, res) =>{
   console.log("I received it");
   res.send("bro finally");
   // res.sendStatus(200);
+});
+
+app.get("/exercises", (req, res) => {
+  res.json(exercises);
+})
+
+app.get("/exercises/chest", (req, res) => {
+  res.json(exercises.chest);
+});
+
+app.get("/exercises/back", (req, res) => {
+  res.json(exercises.back);
 });
 
 // const fileData = fs.readFile('server/file.csv', 'utf8', (err, data) => {
