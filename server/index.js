@@ -8,9 +8,10 @@ app.use(express.json());
 const PORT = 3000;
 let i = 1;
 
-const exercises = {
+let exercises = {
   back: ["pull up", "oap assisted"],
-  chest: ["dips", "one arm pushups"]
+  chest: ["dips", "one arm pushups", "normal push-ups"],
+  legs: [],
 }
 
 
@@ -30,6 +31,10 @@ app.get("/exercises/chest", (req, res) => {
 
 app.get("/exercises/back", (req, res) => {
   res.json(exercises.back);
+});
+
+app.get("/:exercise", (req, res) => {
+  res.send(req.params.exercise);
 });
 
 // const fileData = fs.readFile('server/file.csv', 'utf8', (err, data) => {
