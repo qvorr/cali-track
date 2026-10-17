@@ -33,8 +33,13 @@ app.get("/exercises/back", (req, res) => {
   res.json(exercises.back);
 });
 
-app.get("/:exercise", (req, res) => {
-  res.send(req.params.exercise);
+app.get("/exercises/legs", (req, res) => {
+  res.json(exercises.legs);
+});
+
+app.post("/:exercise", (req, res) => {
+  exercises['legs'].push(req.params.exercise);
+  res.sendStatus(201);
 });
 
 // const fileData = fs.readFile('server/file.csv', 'utf8', (err, data) => {

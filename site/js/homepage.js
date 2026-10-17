@@ -3,6 +3,7 @@ const doesntButtonEl = document.querySelector(".doesnt");
 const exercisesButtonEl = document.querySelector(".exercises");
 const getChestButtonEl = document.querySelector(".getChest");
 const getBackButtonEl = document.querySelector(".getBack");
+const getLegsButtonEl = document.querySelector(".getLegs");
 const getForm = document.querySelector(".textArea");
 const getTextField = document.querySelector(".field");
 const serverURL = "http://127.0.0.1:3000";
@@ -35,12 +36,19 @@ getBackButtonEl.addEventListener("click", async (e) => {
   console.log(result);
 });
 
+getLegsButtonEl.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const data = await fetch(serverURL + "/exercises/legs");
+  const result = await data.json();
+  console.log(result);
+});
+
 getForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log(getTextField.value);
-  const data = await fetch(serverURL + "/" + getTextField.value);
-  const result = await data.text();
-  console.log(result);
+  await fetch(serverURL + "/" + getTextField.value, {
+    method: "POST",
+  });
 });
 
 // doesntButtonEl.addEventListener("click", async (e) => {
