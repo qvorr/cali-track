@@ -1,55 +1,87 @@
+// import * as api from "./api.js";
+
 const worksButtonEl = document.querySelector(".working");
-const doesntButtonEl = document.querySelector(".doesnt");
 const exercisesButtonEl = document.querySelector(".exercises");
 const getChestButtonEl = document.querySelector(".getChest");
 const getBackButtonEl = document.querySelector(".getBack");
 const getLegsButtonEl = document.querySelector(".getLegs");
 const getForm = document.querySelector(".textArea");
 const getTextField = document.querySelector(".field");
-const serverURL = "http://127.0.0.1:3000";
+const clearFieldButtonEl = document.querySelector(".clearResults");
 
-worksButtonEl.addEventListener("click", async (e) => {
-  e.preventDefault();
-  const data = await fetch(serverURL + "/info");
-  const result = await data.text();
-  console.log(result);
-});
+const getResultArea = document.querySelector(".results");
+const serverURL = "http://127.0.0.1:3000/";
+
+async function fetchInfo(request) {
+  const data = await fetch(serverURL + request);
+  const result = await data.json();
+  return result;
+}
 
 exercisesButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await fetch(serverURL + "/exercises");
-  const result = await data.json();
+  const result = await fetchInfo("exercises");
   console.log(result);
+  appendResults(result);
 });
 
 getChestButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await fetch(serverURL + "/exercises/chest");
-  const result = await data.json();
+  const result = await fetchInfo("exercises/chest");
+  appendResults(result);
   console.log(result);
 });
 
 getBackButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await fetch(serverURL + "/exercises/back");
-  const result = await data.json();
+  const result = await fetchInfo("exercises/back");
+  appendResults(result);
   console.log(result);
 });
 
 getLegsButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
-  const data = await fetch(serverURL + "/exercises/legs");
-  const result = await data.json();
+  const result = await fetchInfo("exercises/legs");
+  appendResults(result);
   console.log(result);
 });
 
+clearFieldButtonEl.addEventListener("click", async (e) => {
+  e.preventDefault();
+  clearResultsPanel();
+});
+
+// add an exercise to legs
 getForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  addExercise("legs", getTextField.value);
   console.log(getTextField.value);
-  await fetch(serverURL + "/" + getTextField.value, {
+  getTextField.value = "";
+});
+
+async function addExercise(group, name) {
+  await fetch(serverURL + `exercises/${group}/add/` + name, {
     method: "POST",
   });
-});
+  
+}
+
+// clears the result pane and adds new exercises;
+function showNewResults(result) {
+  clearResultsPanel();
+  appendResults(result);
+}
+
+function appendResults(result) {
+  const showedResults = document.createElement("p");
+  showedResults.textContent = result;
+  showedResults.classList.add("info");
+  getResultArea.appendChild(showedResults);
+}
+
+function clearResultsPanel() {
+  getResultArea.textContent = "";
+}
 
 // doesntButtonEl.addEventListener("click", async (e) => {
 //   e.preventDefault();

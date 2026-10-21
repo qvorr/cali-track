@@ -1,5 +1,8 @@
 const express = require("express");
 const fs = require("node:fs");
+const sqlite = require('better-sqlite3');
+const db = new sqlite("fit.db");
+
 const cors = require("cors");
 const app = express();
 app.use(cors({ origin:"http://127.0.0.1:3020"}));
@@ -14,12 +17,6 @@ let exercises = {
   legs: [],
 }
 
-
-app.get("/info", (req, res) =>{
-  console.log("I received it");
-  res.send("bro finally");
-  // res.sendStatus(200);
-});
 
 app.get("/exercises", (req, res) => {
   res.json(exercises);
