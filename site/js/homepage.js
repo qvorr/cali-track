@@ -1,6 +1,5 @@
 // import * as api from "./api.js";
 
-const worksButtonEl = document.querySelector(".working");
 const exercisesButtonEl = document.querySelector(".exercises");
 const getChestButtonEl = document.querySelector(".getChest");
 const getBackButtonEl = document.querySelector(".getBack");
@@ -34,7 +33,7 @@ getChestButtonEl.addEventListener("click", async (e) => {
 
 getBackButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
-  const result = await fetchInfo("exercises/back");
+  const result = await fetchInfo("exercises/Back");
   appendResults(result);
   console.log(result);
 });
