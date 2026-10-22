@@ -17,13 +17,6 @@ async function fetchInfo(request) {
   return result;
 }
 
-exercisesButtonEl.addEventListener("click", async (e) => {
-  e.preventDefault();
-  const result = await fetchInfo("exercises");
-  console.log(result);
-  appendResults(result);
-});
-
 getChestButtonEl.addEventListener("click", async (e) => {
   e.preventDefault();
   const result = await fetchInfo("exercises/chest");

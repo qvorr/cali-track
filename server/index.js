@@ -11,15 +11,6 @@ app.use(express.json());
 const PORT = 3000;
 let i = 1;
 
-let exercises = {
-  back: ["pull up", "oap assisted"],
-  chest: ["dips", "one arm pushups", "normal push-ups"],
-  legs: [],
-}
-
-app.get("/exercises", (req, res) => {
-  res.json(exercises);
-})
 
 // app.get("/exercises/chest", (req, res) => {
 //   res.json(exercises.chest);
